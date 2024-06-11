@@ -90,13 +90,26 @@ WSGI_APPLICATION = 'jijiapp.wsgi.application'
 #     }
 # }
 
-DATABASES={
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgres://jiji_db_user:sy6DJKb78onHIIX7MmWHPR4HLTGilaaU@dpg-cpk99amct0pc73b4sm30-a.oregon-postgres.render.com/jiji_db',
-        conn_max_age=600
-    )
+# DATABASES={
+#     'default': dj_database_url.config(
+#         # Replace this value with your local database's connection string.
+#         default='postgres://jiji_db_user:sy6DJKb78onHIIX7MmWHPR4HLTGilaaU@dpg-cpk99amct0pc73b4sm30-a.oregon-postgres.render.com/jiji_db',
+#         conn_max_age=600
+#     )
+# }
+
+DATABASES = {
+    'default': {
+        #'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'jsJdmeDpoEXVONKxlZqGJKkXrVSUsoBY',
+        'HOST': 'roundhouse.proxy.rlwy.net',
+        'PORT': '45544',
+    }
 }
+
 
 
 # Password validation
