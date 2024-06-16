@@ -1,4 +1,4 @@
-from .models import product,category,region,cart
+from .models import product,category,region,cart, OrderItem
 from rest_framework import serializers
 
 class categorySerializer(serializers.ModelSerializer):
@@ -19,19 +19,20 @@ class productSerializer(serializers.ModelSerializer):
         model = product
         fields = ['id','name','description','price','stock_quantity','category_id','region_id']
 
+class OrderItemSerializer(serializers.ModelSerializer):
+    product = productSerializer()
+    class Meta:
+        model = OrderItem
+        fields = ["quantity", "date_added", "product"]
+
 
 class cartSerializer(serializers.ModelSerializer):
-    product_id = productSerializer()
+    order_items = OrderItemSerializer(many=True)
     class Meta:
         model = cart
-        fields = ['id','product_id','quantity']
-
-class createCartSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = cart
-        fields = ['id','product_id','quantity']       
+        fields = ['order_items']
 
 class stockSerializer(serializers.ModelSerializer):
     class Meta:
         model = product
-        fields = ['stock_quantity']
+        fields = ["name", 'stock_quantity']
